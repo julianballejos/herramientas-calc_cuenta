@@ -1,257 +1,55 @@
 <!DOCTYPE html>
-<html lang="es-AR">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Setting the pages character encoding -->
+	<meta charset="UTF-8">
 
-    <title>CV Proyecto final</title>
+	<!-- The meta viewport will scale my content to any device width -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="CV_style.css">
-    <link rel="script" href=".../script.js"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+	<!-- Link to my stylesheet -->
+	<link rel="stylesheet" href="styles.css">
 
-    
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-    <script>
-        function myFunction(estediv, desplN) {
-            var x = document.getElementById(estediv);
-            if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById(desplN).innerHTML = "︿";
-            } else {
-                x.style.display = "none";
-                document.getElementById(desplN).innerHTML = "﹀";
-            }
-        }
-    </script>
+	<title>Dividí la cuenta</title>
 
 </head>
-
-<body>
-
-    <div class="sticky"> <!--Panel superior-->
-        <ul>
-            <a href="#tarjeta_exp">EXPERIENCIA</a> |
-            <a href="#tarjeta_edu">EDUCACIÓN</a> |
-            <a href="#tarjeta_hab">HABILIDADES</a> |
-            <a href="#tarjeta_vol">VOLUNTARIADO</a> |
-            <a href="#tarjeta_resumen">INICIO</a>
-        </ul>
-    </div>
-
-    <div id="tarjeta_resumen" , class="container">
+<body onchange="logpruebas(),recalcula()">
+	<h2>Ingresá las personas y los montos que pusieron</h2>
 
 
-        <div class="col-3 col-s-3 myDiv4"> <!--Resumen lateral-->
-            <div style="padding: 0p; margin: 0px;">
-                <img
-                    src="https://d1bvpoagx8hqbg.cloudfront.net/originals/como-buena-foto-tu-curriculum-vitae-mejores-consejos-66295e580e8ed384badf663be0e0ec3b.jpg">
-            </div>
-            <div>
-                <h1>JOSÉ BUENDÍA</h1>
-                <P>Ingeniero industrial</P>
-            </div>
-            <div class="myDiv3">
-                <h2>Resumen</h2>
-                <p class="comun">36 años. Ingeniero egresado de la Universidad Nacional de Tierra del Fuego. Ciclista
-                    apasionado. Aficionado a la fotografía y a la coctelería. Neófito en el desarrollo web.</p>
-            </div>
-            <div class="divider"></div>
-            <div class="myDiv3">
-                <h2>Ubicación</h2>
-                <p class="comun">Rosario</p>
-                <div class="mapouter"> <!-- iframe importado -->
-                    <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
-                            src="https://maps.google.com/maps?q=rosario,%20ar&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><br>
-                        <style>
-                            .mapouter {
-                                position: relative;
-                                text-align: right;
-                            }
-                        </style>
-                        <style>
-                            .gmap_canvas {
-                                overflow: hidden;
-                                background: none !important
-                            }
-                        </style>
-                    </div>
-                </div>
-            </div>
-            <div class="divider"></div>
-            <div class="myDiv3">
-                <h2>Teléfono</h2>
-                <p class="comun">(0341) 151-491625</p>
-            </div>
-            <div class="divider"></div>
-            <div class="myDiv3">
-                <h2>Correo electrónico </h2>
-                <p class="comun">jose.aureliano@buendia.com</p>
-            </div>
-            <div class="divider"></div>
-            <div class="myDiv3">
-                <h2>Idiomas </h2>
-                <p class="comun">
-                    <li>Español</li>
-                    <li>Francés</li>
-                    <li>Japonés</li>
-                </p>
-            </div>
+	<div class="resultado">
+		<div class="tarjeta_resumen" id="sum_total">
+			<p style="font-size: 50px;font-weight: bolder;" id="res_personas">-</p>
+			<p>👥Personas</p>
+		</div>
+		<div class="tarjeta_resumen" id="sum_total">
+			<p style="font-size: 50px;font-weight: bolder;" id="res_monto_total">$ -</p>
+			<p>Total</p>
+		</div>
+	</div>	
 
-        </div>
-
-        <div class="col-7 col-s-7 myDiv6"> <!--Lista de tarjetas-->
-
-            <div id="tarjeta_exp" , class="myDiv5"> <!--Tarjeta EXPERIENCIA-->
-
-                <div class="myDiv2">
-                    <img class="icono_tarjeta" src="https://cdn-icons-png.flaticon.com/512/1243/1243560.png"
-                        alt="icono_maletin">
-                    <h2>EXPERIENCIA</h2>
-                </div>
-
-                <div class="myDiv2">
-
-                    <h2>Supervisor de ventas</h2>
-                    <span id="despl1" , class="desplegable" , onclick="myFunction('divOculta_1','despl1')">﹀</span>
-                    <p class="t2">Cooperativa de trabajo ASD | <span class="t1">FEB 2022 - ACTUALIDAD</span></p>
-                    <div id="divOculta_1" style="display: none;">
-                        <p class="comun">Hago cosas varias, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                            et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Analista de compras</h2>
-                    <span id="despl2" , class="desplegable" , onclick="myFunction('divOculta_2','despl2')">﹀</span>
-                    <p class="t2">MECANO SA. | <span class="t1">FEB 2020 - DIC 2021</span></p>
-                    <div id="divOculta_2" style="display: none;">
-                        <p class="comun">Hago cosas varias, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                            et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Coordinador de procesos</h2>
-                    <span id="despl3" , class="desplegable" , onclick="myFunction('divOculta_3','despl3')">﹀</span>
-                    <p class="t2">Laromet Construcciones | <span class="t1">NOV 2019 - ENE 2020</span></p>
-                    <div id="divOculta_3" style="display: none;">
-                        <p class="comun">Hago cosas varias, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                            et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Control de calidad</h2>
-                    <span id="despl4" , class="desplegable" , onclick="myFunction('divOculta_4','despl4')">﹀</span>
-                    <p class="t2">Industrias Hidro | <span class="t1">MAR 2018 - OCT 2019</span></p>
-                    <div id="divOculta_4" style="display: none;">
-                        <p class="comun">Hago cosas varias, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                            et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
+	
 
 
-            </div>
+	<form action="" method="post" autocomplete="off">
 
+		<div class="field" id="linea_1">
+			<input class="names" type="text" name="nombres[]" placeholder="Nombre 1...">
+			<input class="ammount" type="number" name="puso[]" placeholder="Monto..." id="ammount_1">
+			<div class="conclusion" id="debe_1"></div>
+			<span onclick="addField(this),recalcula()">+</span>
+			<span onclick="removeField(this),logpruebas(),recalcula()">-</span>
+		</div>
 
-            <div id="tarjeta_edu" , class="myDiv5"> <!--Tarjeta EDUACIÓN-->
+		<button class="reset" onclick="location.reload()">Resetear</button>
 
-                <div class="myDiv2">
-                    <img class="icono_tarjeta" src="https://cdn-icons-png.flaticon.com/512/686/686051.png"
-                        alt="icono_grad">
-                    <h2>EDUCACIÓN</h2>
-                </div>
+	</form>
 
-                <div class="myDiv2">
-                    <h2>Universidad Nacional de Tierra del Fuego</h2>
-                    <p class="t2">Ingeniero industrial | <span class="t1">2000 - 2008</span></p>
-                    <div>
-                        <p class="comun"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Cámara Argentina de la Industria</h2>
-                    <p class="t2">Especialización en procesos | <span class="t1">2010</span></p>
-                    <div>
-                        <p class="comun">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et
-                            neque vitae nisi consequat blandit volutpat id ligula. </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="tarjeta_hab" , class="myDiv5"> <!--Tarjeta HABILIDADES-->
-
-                <div class="myDiv2">
-                    <img class="icono_tarjeta" src="https://cdn-icons-png.flaticon.com/512/4470/4470432.png"
-                        alt="icono_llave">
-                    <h2>HABILIDADES</h2>
-                </div>
-
-                <div class="myDiv7">
-                    <p class="comun">HTML</p>
-                    <progress max="100" value="75"> 75% </progress>
-                    <p class="comun">Javascript</p>
-                    <progress max="100" value="70"> 70% </progress>
-                    <p class="comun">CSS</p>
-                    <progress max="100" value="80"> 80% </progress>
-                    <p class="comun">PHP</p>
-                    <progress max="100" value="60"> 60% </progress>
-                    <p class="comun">Habilidad x</p>
-                    <progress max="100" value="50"> 50% </progress>
-                    <p class="comun">Habilidad y</p>
-                    <progress max="100" value="100"> 100% </progress>
-                </div>
-
-            </div>
-
-            <div id="tarjeta_vol" , class="myDiv5"> <!--Tarjeta VOLUNTARIADO-->
-
-                <div class="myDiv2">
-                    <img class="icono_tarjeta" src="https://cdn-icons-png.flaticon.com/512/5920/5920024.png"
-                        alt="icono_vol">
-                    <h2>VOLUNTARIADO</h2>
-                </div>
-
-                <div class="myDiv2">
-                    <h2>Escuela Primaria N° 123</h2>
-                    <p class="comun"> Auxiliar clases de computación para adultos mayores</p>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Jabes Casa de Restauración</h2>
-                    <p class="comun"> Hogar de tránsito para personas en situación de calle</p>
-                </div>
-                <div class="divider"></div>
-
-                <div class="myDiv2">
-                    <h2>Sin rueditas</h2>
-                    <p class="comun"> Escuela de ciclismo para niños</p>
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
+	<script src="script.js"></script> 
 
 </body>
-
 </html>
