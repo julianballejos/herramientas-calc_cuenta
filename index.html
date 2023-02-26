@@ -13,22 +13,25 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
 
 	<title>Dividí la cuenta</title>
 
 </head>
 <body onchange="logpruebas(),recalcula()">
-	<h2>Ingresá las personas y los montos que pusieron</h2>
+	<h2>Ingresá las personas y lo que gastó cada una</h2>
+	<span> </span>
+	<p>Agregá a todos los invoucrados, hayan gastado o no.</p>
 
 
 	<div class="resultado">
 		<div class="tarjeta_resumen" id="sum_total">
-			<p style="font-size: 50px;font-weight: bolder;" id="res_personas">-</p>
-			<p>👥Personas</p>
+			<p class="res" id="res_personas">-</p>
+			<p style="color:rgb(55, 56, 57)">👥 Personas</p>
 		</div>
 		<div class="tarjeta_resumen" id="sum_total">
-			<p style="font-size: 50px;font-weight: bolder;" id="res_monto_total">$ -</p>
-			<p>Total</p>
+			<p class="res" id="res_monto_total">$ -</p>
+			<p style="color:rgb(55, 56, 57)">Total</p>
 		</div>
 	</div>	
 
@@ -41,11 +44,11 @@
 			<input class="names" type="text" name="nombres[]" placeholder="Nombre 1...">
 			<input class="ammount" type="number" name="puso[]" placeholder="Monto..." id="ammount_1">
 			<div class="conclusion" id="debe_1"></div>
-			<span onclick="addField(this),recalcula()">+</span>
+			<span id="mas_1" onclick="addField(this),recalcula()">+</span>
 			<span onclick="removeField(this),logpruebas(),recalcula()">-</span>
 		</div>
 
-		 <button class="reset" onclick="location.reload()">Resetear</button> 
+		 <button class="reset" onclick="location.reload()">Resetear</button>
 
 	</form>
 

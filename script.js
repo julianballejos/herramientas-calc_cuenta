@@ -1,5 +1,13 @@
 calculo(1);
 
+document.getElementById("ammount_1").addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		var boton_mas=document.getElementById("mas_1");
+	  event.preventDefault();
+	  addField(boton_mas);
+	}
+});
+
 function calculo(n){
 	
 	var form1=document.querySelectorAll('.ammount')
@@ -73,7 +81,7 @@ function addField(plusElement){
 	field.setAttribute("type", "text");
 	field.setAttribute("name", "nombres[]");
 	//field.setAttribute("value", "Nombre "+(index));
-	field.setAttribute("placeholder", "Nombre "+(index));
+	field.setAttribute("placeholder", "Nombre "+(index)+"...");
 	field.setAttribute("class", "names");
 	field.setAttribute("id", "name_"+(index));
 
@@ -83,10 +91,11 @@ function addField(plusElement){
 	let field2 = document.createElement("input");
 	field2.setAttribute("type", "number");
 	field2.setAttribute("name", "puso[]");
-	field2.setAttribute("value", 0);
+	//field2.setAttribute("value", 0);
 	field2.setAttribute("placeholder", "Monto");
 	field2.setAttribute("class", "ammount");
 	field2.setAttribute("id", "ammount_"+(index));
+
 
 	console.log("Estoy en addField("+index+") fila 71. input puso creado")
 	
@@ -116,6 +125,8 @@ function addField(plusElement){
 
 	console.log("Estoy en addField("+index+") fila 96. minus span creado")
 
+
+
 	// Adding the elements to the DOM.
 	form.insertBefore(div, displayButton);
 	div.appendChild(field);
@@ -127,12 +138,21 @@ function addField(plusElement){
 	console.log("Estoy en addField("+index+") fila 106. elementos añadidos")
 	
 	resu.setAttribute("value", calculo(index));
-	
+
+
 
 	// Un hiding the minus sign.
 	plusElement.nextElementSibling.style.display = "block"; // the minus sign
 	// Hiding the plus sign.
 	plusElement.style.display = "none"; // the plus sign
+
+	// Cuando se ingresa enter se agrega otra fila
+	document.getElementById("ammount_"+(index)).addEventListener("keypress", function(event) {
+		if (event.key === "Enter") {
+		  event.preventDefault();
+		  addField(plus);
+		}
+	});
 
 	recalcula();
 	logpruebas();
@@ -148,7 +168,7 @@ function removeField(minusElement){
 }
 
 let form = document.forms[0];
-form.addEventListener("submit", fetchTextNotes);
+
 
 //let form0=document.getElementsByClassName('names')
 //let form1=document.getElementsByClassName('ammount')

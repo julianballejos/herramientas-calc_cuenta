@@ -20,8 +20,14 @@
 	box-sizing: border-box;
 }
 
+div{display: inline;}
+
+p{display: inline;}
+
+h2{font-size: -webkit-calc(2vw + 0.5em);font-weight: bold;}
+
 body{
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Inconsolata', monospace;
 	min-height: 100%;
 	color: #555;
 	width: 80%;
@@ -49,24 +55,33 @@ div.resultado{
 	/* background-color: #c0dde1; */
 	padding: 20px;
 	border: 0px solid rgb(0, 0, 0);
-
+    display: block;
 	text-align: center;
 
 }
 
+.res{
+	font-size: -webkit-calc(3vw + 10px);
+	font-weight: bolder;
+	animation-name: animacion_calculo;
+	animation-duration: 0.2s;
+	animation-timing-function: linear;
+	animation-delay: 0.0s;
+}
+
 .conclusion{
-	padding: 5px;
+	padding: 0.5%;
 }
 
 .conclusion p{
 	border-bottom: thin dotted #d4d4d4;
-	padding: 20px 10px 0px 0px;
+	padding: 20% 1% 0% 0%;
 	font-style: italic;
 	font-size: 12px;
 	text-align: center;
 	font-weight: bold;
 	display: flex;
-	margin: 0;
+	/*margin: 50% 0%;*/
 	position: relative;
 	animation-name: animacion_calculo;
 	animation-duration: 0.2s;
@@ -90,54 +105,67 @@ div.resultado{
 
 	form {
 		width: 100%;
+		max-width: 700px;
 		transition: visibility 0s, opacity 0.5s linear;
 		background-color: #d3dcde;
 		border-radius: 6px;
 		padding: 0px 0px 0px 10px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 .field{
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 	display: flex;
 	
-    -webkit-animation: fadeIn 0.5s;
-    animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.7s;
+    animation: fadeIn 0.7s;
 }
 
 .field input {
 
+	/* padding: 10px 20px;
+	margin: 18px 8px; */
+
 	width: 65%;
-	font-size: 100%;
-	color: #888;
-	background-color: #f9f9f9;
-	padding: 10px 20px;
-	margin: 18px 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+    font-size: 100%;
+    color: #888;
+    background-color: #f9f9f9;
+    padding: 1% 2%;
+    margin: 1.8% 0.8%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+	font-family: 'Inconsolata', monospace;
+
 }
 
 .field input:focus{
 	outline: none;
-	border-color: #275EFE;
+	border-color: #24527a;
+	border-width: 2px;
 }
 
 .field span{
 	display: inline-block;
-	margin: 20px;
-	cursor: pointer;
-	background-color: #f9f9f9;
-	padding: 10px;
-	transition: all 0.3s;
-	font-weight: bold;
-	border: thin solid #d4d4d4;
-	text-align: center;
-	vertical-align: middle; 
-	border-radius: 4px;
+    margin: 2%;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    padding: 1.2%;
+    transition: all 0.3s;
+    font-weight: bold;
+    border: thin solid #d4d4d4;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 .field span:last-child{
 	display: none;
-	padding: 12px;
+	padding: 1.2%;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 .field span:hover{
 	background-color: green;
@@ -162,15 +190,16 @@ button{
 	border: thin solid #d5e4d4;
 	cursor: pointer;
 	color: #fff;
+	font-family: 'Inconsolata', monospace;
 }
 
 button:active{
-	background-color: #aedea6;
+	background-color: #5dacbd;
 	color: #000;
 }
 
 .reset{
 	float: right;
-	background-color: green;
+	background-color: #24527a;
 	border-radius: 4px;
 }
