@@ -14,11 +14,11 @@ function calculo(n){
 
 	var debe= document.getElementById("ammount_"+n).value-sum_puso/puso.length
 
-	if (debe<0){s=" debe";col="conclusion.neg"}else{s=" a favor";col="conclusion.pos"}
+	if (debe<0){s=" debe";col="red"}else{s=" a favor";col="green"}
 
-	document.getElementById("debe_"+n).innerHTML = "<p> $"+Math.abs(Math.floor(debe))+s+"</p>";
+	document.getElementById("debe_"+n).innerHTML = "<p> $"+Math.abs(Math.floor(debe)).toLocaleString()+s+"</p>";
+	document.getElementById("debe_"+n).style.color = col;
 	//document.getElementById("debe_"+n).classList.remove("conclusion");
-	//document.getElementById("debe_"+n).classList.add(col)
 
 }
 
@@ -37,10 +37,10 @@ function recalcula(){
 
 	for(k=0;k<form1.length;k++){
 		debe= puso[k]-sum_puso/puso.length
-		if (debe<0){s=" debe";col="conclusion.neg"}else{s=" a favor";col="conclusion.pos"}
-		form2[k].innerHTML = "<p>$ "+Math.abs(Math.floor(debe))+s+"</p>";
-		//form2[k].classList.remove("conclusion");
-		//form2[k].classList.add(col)
+		if (debe<0){s=" debe";col="red"}else{s=" a favor";col="green"}
+		form2[k].innerHTML = "<p>$ "+Math.abs(Math.floor(debe)).toLocaleString()+s+"</p>";
+		form2[k].style.color = col;
+
 		
 	}
 
@@ -72,7 +72,7 @@ function addField(plusElement){
 	let field = document.createElement("input");
 	field.setAttribute("type", "text");
 	field.setAttribute("name", "nombres[]");
-	field.setAttribute("value", "Nombre "+(index));
+	//field.setAttribute("value", "Nombre "+(index));
 	field.setAttribute("placeholder", "Nombre "+(index));
 	field.setAttribute("class", "names");
 	field.setAttribute("id", "name_"+(index));
@@ -81,12 +81,12 @@ function addField(plusElement){
 
 	// Creating the puso element.
 	let field2 = document.createElement("input");
-	field.setAttribute("type", "number");
-	field.setAttribute("name", "puso[]");
-	field.setAttribute("value", 0);
-	field.setAttribute("placeholder", "Monto");
-	field.setAttribute("class", "ammount");
-	field.setAttribute("id", "ammount_"+(index));
+	field2.setAttribute("type", "number");
+	field2.setAttribute("name", "puso[]");
+	field2.setAttribute("value", 0);
+	field2.setAttribute("placeholder", "Monto");
+	field2.setAttribute("class", "ammount");
+	field2.setAttribute("id", "ammount_"+(index));
 
 	console.log("Estoy en addField("+index+") fila 71. input puso creado")
 	
@@ -118,8 +118,8 @@ function addField(plusElement){
 
 	// Adding the elements to the DOM.
 	form.insertBefore(div, displayButton);
-	div.appendChild(field2);
-	div.appendChild(field);	
+	div.appendChild(field);
+	div.appendChild(field2);	
 	div.appendChild(resu);
 	div.appendChild(plus);
 	div.appendChild(minus);
@@ -213,7 +213,7 @@ function logpruebas(){
 
 	//for(j=0;j<puso.length;j++){console.log(+puso[j])}
 
-	document.getElementById('res_monto_total').innerHTML = "$ "+sum_puso;
+	document.getElementById('res_monto_total').innerHTML = "$ "+sum_puso.toLocaleString();
 	document.getElementById('res_personas').innerHTML = puso.length;
 
 }
