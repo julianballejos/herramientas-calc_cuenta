@@ -24,7 +24,7 @@ function calculo(n){
 
 	if (debe<0){s=" debe";col="red"}else{s=" a favor";col="green"}
 
-	document.getElementById("debe_"+n).innerHTML = "<p> $"+Math.abs(Math.floor(debe)).toLocaleString()+s+"</p>";
+	document.getElementById("debe_"+n).innerHTML = " $"+Math.abs(Math.floor(debe)).toLocaleString()+s;
 	document.getElementById("debe_"+n).style.color = col;
 	//document.getElementById("debe_"+n).classList.remove("conclusion");
 
@@ -46,7 +46,7 @@ function recalcula(){
 	for(k=0;k<form1.length;k++){
 		debe= puso[k]-sum_puso/puso.length
 		if (debe<0){s=" debe";col="red"}else{s=" a favor";col="green"}
-		form2[k].innerHTML = "<p>$ "+Math.abs(Math.floor(debe)).toLocaleString()+s+"</p>";
+		form2[k].innerHTML = "$ "+Math.abs(Math.floor(debe)).toLocaleString()+s;
 		form2[k].style.color = col;
 
 		
