@@ -189,6 +189,9 @@ div.resultado {
 	color: #fff;
 	font-family: 'Inconsolata', monospace;
 	text-align: center;
+	float: right;
+	background-color: #24527a;
+	border-radius: 4px;
 }
 
 .boton:active{
@@ -196,8 +199,7 @@ div.resultado {
 	color: #000;
 }
 
-.reset{
-	float: right;
-	background-color: #24527a;
-	border-radius: 4px;
+.boton:hover{
+	background-color: #40627f;
+	color: #000;
 }
