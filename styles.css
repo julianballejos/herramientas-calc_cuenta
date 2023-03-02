@@ -175,13 +175,12 @@ div.resultado {
 }
 
 
-.boton{
+button{
 	display: block;
 	padding: 2% 2%;
 	margin-top: 30px;
 	width:  30%;
 	max-width:  150px;
-	float: left;
 	font-size: -webkit-calc(0.2vw + 0.8em);
 	background-color: #5b8ebf;
 	border: thin solid #d5e4d4;
@@ -194,12 +193,12 @@ div.resultado {
 	border-radius: 4px;
 }
 
-.boton:active{
+button:active{
 	background-color: #5dacbd;
 	color: #000;
 }
 
-.boton:hover{
+button:hover{
 	background-color: #40627f;
 	color: #000;
 }
