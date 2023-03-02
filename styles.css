@@ -32,7 +32,7 @@ body{
 	color: #555;
 	width: 90%;
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-top: 35px;
 	background-color: #ebebeb;
 }
 
@@ -61,7 +61,7 @@ div.resultado {
 }
 
 .res{
-	font-size: -webkit-calc(3vw + 10px);
+	font-size: -webkit-calc(3vw + 15px);
 	font-weight: bolder;
 	animation-name: animacion_calculo;
 	animation-duration: 0.2s;
@@ -138,6 +138,10 @@ div.resultado {
 	border-width: 2px;
 }
 
+.field input:hover {
+	box-shadow: 0 0 8px #24527a7c;
+  }
+
 .field span{
 	display: inline-block;
     margin: 2%;
@@ -178,7 +182,7 @@ button{
 	width:  30%;
 	max-width:  150px;
 	float: left;
-	font-size: -webkit-calc(1vw + 0.4em)
+	font-size: -webkit-calc(0.2vw + 0.8em);
 	background-color: #5b8ebf;
 	border: thin solid #d5e4d4;
 	cursor: pointer;
