@@ -175,7 +175,7 @@ div.resultado {
 }
 
 
-.button{
+.boton{
 	display: block;
 	padding: 2% 2%;
 	margin-top: 30px;
@@ -191,7 +191,7 @@ div.resultado {
 	text-align: center;
 }
 
-.button:active{
+.boton:active{
 	background-color: #5dacbd;
 	color: #000;
 }
