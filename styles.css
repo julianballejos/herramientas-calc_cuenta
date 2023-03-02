@@ -30,7 +30,7 @@ body{
 	font-family: 'Inconsolata', monospace;
 	min-height: 100%;
 	color: #555;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	padding-top: 20px;
 	background-color: #ebebeb;
@@ -173,11 +173,12 @@ div.resultado {
 
 button{
 	display: block;
-	padding: 10px 20px;
+	padding: 2% 2%;
 	margin-top: 30px;
-	width:  150px;
+	width:  30%;
+	max-width:  150px;
 	float: left;
-	font-size: 16px;
+	font-size: -webkit-calc(1vw + 0.4em)
 	background-color: #5b8ebf;
 	border: thin solid #d5e4d4;
 	cursor: pointer;
