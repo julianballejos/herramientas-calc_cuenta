@@ -18,9 +18,6 @@
 <body onchange="logpruebas(),recalcula()">
 	<h2>Ingresá las personas y lo que gastó cada una</h2>
 	
-	<p>Agregá tantas líneas como cantidad de personas haya en total.</p>
-
-
 	<div class="resultado">
 		<div class="tarjeta_resumen" id="sum_total">
 			<p class="res" id="res_personas">-</p>
@@ -45,9 +42,16 @@
 			<span onclick="removeField(this),logpruebas(),recalcula()">-</span>
 		</div>
 
-		 <button onclick="location.reload()">Resetear</button>
-
+		 
+		 
 	</form>
+<div class="resultado">
+	<button onclick="location.reload()">Resetear</button>
+	<button onclick="sugerirTransferencias()">💡 Resumen</button>
+	<button onclick="compartirURL()">Compartir</button>
+</div>
+	<div id="transferencias" class="transferencias"></div>
+
 
 	<script src="script.js"></script> 
 
