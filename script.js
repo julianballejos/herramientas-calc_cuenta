@@ -48,9 +48,9 @@ function recalcula(){
 		if (debe<0){s=" debe";col="red"}else{s=" a favor";col="green"}
 		form2[k].innerHTML = "$ "+Math.abs(Math.floor(debe)).toLocaleString()+s;
 		form2[k].style.color = col;
-
-		
 	}
+
+	//sugerirTransferencias();
 
 }
 
@@ -165,6 +165,7 @@ function removeField(minusElement){
    minusElement.parentElement.remove();
    logpruebas();
    recalcula();
+
 }
 
 let form = document.forms[0];
@@ -239,52 +240,104 @@ function logpruebas(){
 }
 
 
+function sugerirTransferencias() {
+    var nombres = document.querySelectorAll('.names');
+    var montos = document.querySelectorAll('.ammount');
+    let transferencias = document.getElementById("transferencias");
+    transferencias.innerHTML = ""; // Limpiamos sugerencias previas
 
-function fetchTextNotes(event){
-	// prevent the form to communicate with the server.
-	event.preventDefault();
+    let personas = [];
 
-	// Fetch the values from the input fields.
-	let data = new FormData(form);
+    let total = 0;
+    montos.forEach(m => total += parseFloat(m.value || 0));
 
+    let promedio = total / montos.length;
 
-	// Storing the values inside an array so we can handle them.
-	// we don't want empty values.
-	let nombres = [];
-	data.forEach( function(value){
-		if(value !== ""){
-			nombres.push(value);
-		}
-	});
+    // Creamos el array de personas con saldo neto
+    for (let i = 0; i < nombres.length; i++) {
+        let saldo = parseFloat(montos[i].value || 0) - promedio;
+        personas.push({
+            nombre: nombres[i].value || "Persona " + (i + 1),
+            saldo: Math.round(saldo) // Redondeamos para evitar decimales feos
+        });
+    }
 
-	let puso = [];
-	data.forEach( function(value){
-		if(value !== ""){
-			puso.push(value);
-		}
-	});
+    let deudores = personas.filter(p => p.saldo < 0);
+    let acreedores = personas.filter(p => p.saldo > 0);
 
-	// Output the values on the screen.
-	let out = "";
-	for(let note of notes){
-		out += `
-			<p>${note} <span onclick="markAsDone(this)">Mark as done</span></p>
-		`;
-	}
-	document.querySelector(".notes").innerHTML = out;
+    let resultado = [];
 
-	// Delete all input elements except the last one.
-	let inputFields = document.querySelectorAll(".field");
-	inputFields.forEach(function(element, index){
-		if(index == inputFields.length - 1){
-			element.children[0].value = "";
-		}else{
-			element.remove();
-		}
-	});
+    // Vamos haciendo las transferencias sugeridas
+    while (deudores.length && acreedores.length) {
+        let deudor = deudores[0];
+        let acreedor = acreedores[0];
+
+        let montoTransferir = Math.min(Math.abs(deudor.saldo), acreedor.saldo);
+
+        resultado.push(`${deudor.nombre} debería transferir $${montoTransferir.toLocaleString()} a ${acreedor.nombre}<br>`);
+
+        deudor.saldo += montoTransferir;
+        acreedor.saldo -= montoTransferir;
+
+        if (Math.abs(deudor.saldo) < 1) deudores.shift();
+        if (Math.abs(acreedor.saldo) < 1) acreedores.shift();
+    }
+
+    if (resultado.length === 0) {
+        transferencias.innerHTML = "No se requieren transferencias 🎉";
+    } else {
+        transferencias.innerHTML = resultado.map(r => `<div>${r}</div>`).join("");
+    }
 }
 
-function markAsDone(element){
-	element.classList.add("mark");
-	element.innerHTML = "&check;";
+function compartirURL() {
+    const nombres = Array.from(document.querySelectorAll(".names")).map(input => input.value.trim());
+    const montos = Array.from(document.querySelectorAll(".ammount")).map(input => input.value.trim());
+
+    const datos = nombres.map((nombre, i) => ({
+        n: encodeURIComponent(nombre),
+        m: encodeURIComponent(montos[i] || 0)
+    }));
+
+    const query = datos.map(d => `n=${d.n}&m=${d.m}`).join("&");
+
+    const nuevaURL = `${window.location.origin}${window.location.pathname}?${query}`;
+
+    // Intentar copiar automáticamente
+    navigator.clipboard.writeText(nuevaURL).then(() => {
+        alert("¡Link copiado al portapapeles!\nYa podés compartirlo donde quieras.");
+    }).catch(() => {
+        // Si falla (por permisos del navegador), mostrarlo en un prompt
+        prompt("Copiá y compartí este link:", nuevaURL);
+    });
+
 }
+
+function cargarDesdeURL() {
+    const params = new URLSearchParams(window.location.search);
+    const nombres = params.getAll("n");
+    const montos = params.getAll("m");
+
+    if (nombres.length > 0) {
+        // Borrar los campos actuales (menos el primero)
+        document.querySelectorAll(".field").forEach((el, idx) => {
+            if (idx > 0) el.remove();
+        });
+
+        // Llenar el primer campo
+        document.querySelector(".names").value = decodeURIComponent(nombres[0]);
+        document.querySelector(".ammount").value = decodeURIComponent(montos[0] || "0");
+
+        // Agregar el resto
+        for (let i = 1; i < nombres.length; i++) {
+            addField(document.querySelectorAll("span[onclick^='addField']")[i - 1]);
+            document.getElementById(`name_${i + 1}`).value = decodeURIComponent(nombres[i]);
+            document.getElementById(`ammount_${i + 1}`).value = decodeURIComponent(montos[i] || "0");
+        }
+
+        recalcula();
+    }
+}
+
+// Ejecutar al cargar la página
+window.addEventListener("DOMContentLoaded", cargarDesdeURL);
