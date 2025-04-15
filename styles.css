@@ -71,7 +71,7 @@ div.resultado {
 
 .conclusion {
     padding: 0.5%;
-    width: 20%;
+    width: 30%;
     border-bottom: thin dotted #d4d4d4;
     /* padding: 2%; */
     font-style: italic;
@@ -178,7 +178,7 @@ div.resultado {
 button{
 	display: block;
 	padding: 2% 2%;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 	width:  30%;
 	max-width:  150px;
 	font-size: -webkit-calc(0.2vw + 0.8em);
