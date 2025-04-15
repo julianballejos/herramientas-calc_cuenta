@@ -301,7 +301,7 @@ function compartirURL() {
 
     const query = datos.map(d => `n=${d.n}&m=${d.m}`).join("&");
 
-    const nuevaURL = `${window.location.origin}${window.location.pathname}?${query}`;
+    const nuevaURL = "¡Probá esta herramienta para dividir gastos con amigos! Acá te dejo el cálculo de nuestro grupo:"+`${window.location.origin}${window.location.pathname}?${query}`;
 
     // Intentar copiar automáticamente
     navigator.clipboard.writeText(nuevaURL).then(() => {
