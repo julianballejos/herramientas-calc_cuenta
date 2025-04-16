@@ -341,3 +341,33 @@ function cargarDesdeURL() {
 
 // Ejecutar al cargar la página
 window.addEventListener("DOMContentLoaded", cargarDesdeURL);
+
+
+function resetearFormulario() {
+    // Limpiar todos los campos del formulario
+    document.querySelector("form").reset();
+
+    // Borrar todos los campos generados dinámicamente excepto el primero
+    let camposExtra = document.querySelectorAll(".field");
+    camposExtra.forEach((field, index) => {
+        if (index !== 0) field.remove();
+    });
+
+    // Resetear los resultados
+    document.getElementById("res_monto_total").innerHTML = "$ 0";
+    document.getElementById("res_personas").innerHTML = "1";
+    document.getElementById("res_transferencias").innerHTML = "";
+
+    // Limpiar conclusiones
+    let conclusiones = document.querySelectorAll(".conclusion");
+    conclusiones.forEach(c => {
+        c.innerHTML = "";
+        c.style.color = "";
+    });
+
+    // Eliminar parámetros de la URL sin recargar
+    history.replaceState(null, "", location.pathname);
+    
+    // Reiniciar el índice a 2 (para que la próxima fila sea la "Persona 2")
+    index = 2;
+}
