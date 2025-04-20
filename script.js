@@ -368,6 +368,16 @@ function resetearFormulario() {
     // Eliminar parámetros de la URL sin recargar
     history.replaceState(null, "", location.pathname);
     
+    // Restaurar visibilidad correcta del + y ocultar el -
+    let campoUnico = document.querySelector(".field");
+    if (campoUnico) {
+        let spans = campoUnico.querySelectorAll("span");
+        if (spans.length === 2) {
+            spans[0].style.display = "inline"; // el +
+            spans[1].style.display = "none";   // el -
+        }
+    }
+
     // Reiniciar el índice a 2 (para que la próxima fila sea la "Persona 2")
     index = 2;
 }
