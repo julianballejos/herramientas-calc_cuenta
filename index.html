@@ -4,7 +4,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dividir gastos</title>
-<link rel="stylesheet" href="styles.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f5f4f0;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.app {
+  max-width: 580px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 1.75rem;
+}
+
+.col-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 34px;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 2px;
+}
+
+.col-label {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 34px;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.field-row input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.field-row input:focus {
+  border-color: #aaa;
+}
+
+.field-row input::placeholder {
+  color: #ccc;
+}
+
+.btn-delete {
+  width: 34px;
+  height: 38px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-delete:hover {
+  background: #fff0f0;
+  color: #d0392b;
+  border-color: #f5c6c2;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn:hover {
+  background: #f5f5f5;
+}
+
+.btn-primary {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-danger {
+  color: #d0392b;
+  border-color: #f5c6c2;
+}
+
+.btn-danger:hover {
+  background: #fff0f0;
+}
+
+.divider {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 1.75rem 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.metric {
+  background: #ebebeb;
+  border-radius: 8px;
+  padding: 14px 12px;
+}
+
+.metric-label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.transfers-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.transfer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.transfer-from {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.transfer-arrow {
+  color: #ccc;
+  font-size: 12px;
+}
+
+.transfer-to {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.transfer-amount {
+  margin-left: auto;
+  font-weight: 500;
+  background: #e6f4ec;
+  color: #1e7e44;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.settled {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  padding: 1.25rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-family: inherit;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+@media (max-width: 420px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary-grid .metric:last-child {
+    grid-column: span 2;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -35,8 +296,174 @@
 </div>
 
 <div class="toast" id="toast"></div>
-<script src="script.js"></script> 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+
+<script>
+let personas = [];
+
+function toCents(v) { return Math.round((parseFloat(v) || 0) * 100); }
+function fromCents(v) { return (v / 100).toFixed(2); }
+
+function encodeData(d) {
+  return LZString.compressToEncodedURIComponent(JSON.stringify(d));
+}
+
+function decodeData(s) {
+  try {
+    return JSON.parse(LZString.decompressFromEncodedURIComponent(s));
+  } catch {
+    return null;
+  }
+}
+
+function getSaldos() {
+  const total = personas.reduce((a, p) => a + toCents(p.monto), 0);
+  const prom = personas.length ? total / personas.length : 0;
+  return personas.map(p => ({
+    nombre: p.nombre || "Sin nombre",
+    saldo: Math.round(toCents(p.monto) - prom)
+  }));
+}
+
+function calcular() {
+  const hasData = personas.some(p => p.nombre || parseFloat(p.monto));
+  const section = document.getElementById("summary-section");
+
+  if (!personas.length || !hasData) {
+    section.style.display = "none";
+    return;
+  }
+
+  section.style.display = "block";
+
+  const total = personas.reduce((a, p) => a + (parseFloat(p.monto) || 0), 0);
+  const prom = personas.length ? total / personas.length : 0;
+
+  document.getElementById("resumen").innerHTML = `
+    <div class="metric">
+      <div class="metric-label">Total</div>
+      <div class="metric-value">$${total.toFixed(2)}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Personas</div>
+      <div class="metric-value">${personas.length}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Por persona</div>
+      <div class="metric-value">$${prom.toFixed(2)}</div>
+    </div>
+  `;
+
+  renderTransferencias(getSaldos());
+  actualizarURL();
+}
+
+function renderTransferencias(saldos) {
+  let d = saldos.filter(p => p.saldo < 0).sort((a, b) => a.saldo - b.saldo);
+  let a = saldos.filter(p => p.saldo > 0).sort((a, b) => b.saldo - a.saldo);
+  let out = [];
+
+  while (d.length && a.length) {
+    let de = d[0], ac = a[0];
+    let m = Math.min(Math.abs(de.saldo), ac.saldo);
+    out.push(`
+      <div class="transfer-item">
+        <span class="transfer-from">${de.nombre}</span>
+        <span class="transfer-arrow">&#8594;</span>
+        <span class="transfer-to">${ac.nombre}</span>
+        <span class="transfer-amount">$${fromCents(m)}</span>
+      </div>
+    `);
+    de.saldo += m;
+    ac.saldo -= m;
+    if (Math.abs(de.saldo) < 1) d.shift();
+    if (Math.abs(ac.saldo) < 1) a.shift();
+  }
+
+  document.getElementById("transferencias").innerHTML =
+    out.length ? out.join("") : '<div class="settled">Todo está saldado 🎉</div>';
+}
+
+function actualizarURL() {
+  const url = `${location.pathname}?data=${encodeData(personas)}`;
+  history.replaceState(null, "", url);
+}
+
+function compartir() {
+  const url = window.location.href;
+  const texto = "¡Probá esta herramienta para dividir gastos con amigos!";
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Dividir gastos",
+      text: texto,
+      url: url
+    });
+  } else {
+    const fullText = `${texto}\n${url}`;
+    navigator.clipboard.writeText(fullText)
+      .then(() => showToast("Mensaje copiado"))
+      .catch(() => prompt("Copiá este texto:", fullText));
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+function cargarDesdeURL() {
+  const p = new URLSearchParams(window.location.search).get("data");
+  if (p) {
+    const parsed = decodeData(p);
+    if (parsed && Array.isArray(parsed)) personas = parsed;
+  }
+  if (!personas.length) personas = [{ nombre: "", monto: 0 }];
+}
+
+function render() {
+  const c = document.getElementById("fields");
+  c.innerHTML = "";
+
+  personas.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "field-row";
+    div.innerHTML = `
+      <input placeholder="Nombre" value="${p.nombre}"
+        oninput="personas[${i}].nombre = this.value; calcular()">
+      <input type="number" placeholder="0.00" value="${p.monto || ''}"
+        oninput="personas[${i}].monto = this.value; calcular()">
+      <button class="btn-delete" onclick="removeField(${i})" title="Eliminar">&#10005;</button>
+    `;
+    c.appendChild(div);
+  });
+
+  calcular();
+}
+
+function addField() {
+  personas.push({ nombre: "", monto: 0 });
+  render();
+}
+
+function removeField(i) {
+  personas.splice(i, 1);
+  if (!personas.length) personas.push({ nombre: "", monto: 0 });
+  render();
+}
+
+function reset() {
+  personas = [{ nombre: "", monto: 0 }];
+  history.replaceState(null, "", location.pathname);
+  render();
+}
+
+cargarDesdeURL();
+render();
+</script>
+
 </body>
 </html>
-
-
